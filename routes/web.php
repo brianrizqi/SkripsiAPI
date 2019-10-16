@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ArticleController@index')->name('article');
+Route::get('/article/create', 'ArticleController@create')->name('article.create');
+Route::post('/article', 'ArticleController@store')->name('article.store');
+
+Route::get('/users', 'UsersController@index')->name('users');

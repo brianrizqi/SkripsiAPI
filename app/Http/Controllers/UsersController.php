@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('users', compact('users'));
+    }
+
     public function login(Request $request)
     {
         $username = $request->username;

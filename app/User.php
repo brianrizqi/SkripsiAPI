@@ -52,4 +52,9 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    public function plant()
+    {
+        return $this->hasMany('App\Plant');
+    }
 }
