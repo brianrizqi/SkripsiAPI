@@ -21,7 +21,8 @@
                             </div>
                         </div>
                         <div class="article-details">
-                            <p>
+                            <p style="text-overflow: ellipsis; white-space: nowrap;
+     overflow: hidden;">
                                 {{$item->article}}
                             </p>
                             <div class="article-cta">

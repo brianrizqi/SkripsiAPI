@@ -91,4 +91,14 @@ class ArticleController extends Controller
     {
         //
     }
+
+    public function indexApi()
+    {
+        $data = array();
+        $article = Article::get()->take(5);
+        $data['error'] = false;
+        $data['message'] = "Success";
+        $data['data'] = $article;
+        return response()->json($data);
+    }
 }

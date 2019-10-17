@@ -10,6 +10,8 @@ Route::post('/register', 'UsersController@register');
 
 Route::get('/cuaca', 'PlantsController@cuaca');
 
+Route::get('/article', 'ArticleController@indexApi');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
