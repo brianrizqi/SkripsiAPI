@@ -9,6 +9,7 @@ Route::post('/login', 'UsersController@login');
 Route::post('/register', 'UsersController@register');
 
 Route::get('/cuaca', 'PlantsController@cuaca');
+Route::get('/getCuaca', 'PlantsController@getCuaca');
 
 Route::get('/article', 'ArticleController@indexApi');
 

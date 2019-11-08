@@ -65,6 +65,35 @@
                             <li><a class="nav-link" href="{{route('article.create')}}">Create Article</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-square"></i><span>Plants</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="{{route('plant')}}">Plants</a></li>
+                            <li><a class="nav-link" href="{{route('plant.create')}}">Create Plant</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-square"></i><span>Criteria</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="{{route('criteria')}}">Criteria</a></li>
+                            <li><a class="nav-link" href="{{route('criteria.create')}}">Create Criteria</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-square"></i><span>Values</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="{{route('value')}}">Values</a></li>
+                            <li><a class="nav-link" href="{{route('value.create')}}">Create Value</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-square"></i><span>Data</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="{{route('data')}}">Data</a></li>
+                            <li><a class="nav-link" href="{{route('data.create')}}">Create Data</a></li>
+                            <li><a class="nav-link" href="{{route('sppk')}}">Create Data</a></li>
+                        </ul>
+                    </li>
                     <li><a class="nav-link" href="{{route('users')}}"><i class="far fa-user"></i> <span>User</span></a>
                     </li>
                 </ul>
