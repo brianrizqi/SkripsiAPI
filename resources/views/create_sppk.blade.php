@@ -17,11 +17,12 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Suhu</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <select class="form-control" name="suhu">
-                                        @foreach($data->where('criteria_id',1) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->value}}</option>
-                                        @endforeach
-                                    </select>
+{{--                                    <select class="form-control" name="suhu">--}}
+{{--                                        @foreach($data->where('criteria_id',1) as $item)--}}
+{{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+                                    <input type="number" class="form-control" name="suhu">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
@@ -47,11 +48,12 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kedalaman Tanah</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <select class="form-control" name="kedalaman_tanah">
-                                        @foreach($data->where('criteria_id',4) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->value}}</option>
-                                        @endforeach
-                                    </select>
+{{--                                    <select class="form-control" name="kedalaman_tanah">--}}
+{{--                                        @foreach($data->where('criteria_id',4) as $item)--}}
+{{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+                                    <input type="number" class="form-control" name="kedalaman_tanah">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">

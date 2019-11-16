@@ -89,9 +89,9 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-square"></i><span>Data</span></a>
                         <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="{{route('data')}}">Data</a></li>
+{{--                            <li><a class="nav-link" href="{{route('data')}}">Data</a></li>--}}
                             <li><a class="nav-link" href="{{route('data.create')}}">Create Data</a></li>
-                            <li><a class="nav-link" href="{{route('sppk')}}">Create Data</a></li>
+                            <li><a class="nav-link" href="{{route('sppk')}}">Create SPPK</a></li>
                         </ul>
                     </li>
                     <li><a class="nav-link" href="{{route('users')}}"><i class="far fa-user"></i> <span>User</span></a>

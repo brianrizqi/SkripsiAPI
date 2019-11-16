@@ -15,9 +15,9 @@ class DataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $data = Data::all();
+        $data = Data::where('plant_id', $id)->get();
         return view('data', compact('data'));
     }
 
@@ -48,7 +48,7 @@ class DataController extends Controller
         $data->value = $request->value;
         $data->parameter = $request->parameter;
         $data->save();
-        return redirect('data');
+        return redirect('data/create');
     }
 
     /**
@@ -104,10 +104,67 @@ class DataController extends Controller
 
     public function hitungsppk(Request $request)
     {
-        $suhu = ((4 - $request->suhu) / (4 - 1)) * 0.1;
+        $data = Data::where('plant_id', 1)->get();
+        $suhu = 0;
+        $kedalaman_tanah = 0;
+
+        //suhu
+        foreach ($data->where('criteria_id', 1) as $item) {
+            $temp = str_replace(" ", "", $item->value);
+            $kurang = strpos($temp, '<');
+            $lebih = strpos($temp, '>');
+            if ($kurang !== false) {
+                $batas = substr($temp, -2);
+                if ($request->suhu < $batas) {
+                    $suhu = $item->parameter;
+                }
+            } else if ($lebih !== false) {
+                $batas = substr($temp, -2);
+                if ($request->suhu > $batas) {
+                    $suhu = $item->parameter;
+                }
+            } else {
+                $batasAtas = substr($temp, 0, 2);
+                $batasBawah = substr($temp, -2);
+                $d = $request->suhu;
+                if ($d >= $batasAtas && $d <= $batasBawah) {
+                    $suhu = $item->parameter;
+                }
+            }
+        }
+        //
+
+        //kedalaman tanah
+        foreach ($data->where('criteria_id', 4) as $item) {
+            $temp = str_replace(" ", "", $item->value);
+            $kurang = strpos($temp, '<');
+            $lebih = strpos($temp, '>');
+            if ($kurang !== false) {
+                $batas = substr($temp, -2);
+                if ($request->kedalaman_tanah < $batas) {
+                    $kedalaman_tanah = $item->parameter;
+                }
+            } else if ($lebih !== false) {
+                $batas = substr($temp, -2);
+                if ($request->kedalaman_tanah > $batas) {
+                    $kedalaman_tanah = $item->parameter;
+                }
+            } else {
+                $batasAtas = substr($temp, 0, 2);
+                $batasBawah = substr($temp, -2);
+                $d = $request->kedalaman_tanah;
+                if ($d >= $batasAtas && $d <= $batasBawah) {
+                    $kedalaman_tanah = $item->parameter;
+                }
+            }
+        }
+        //
+
+        //metode SMART
+        $suhu = ((4 - $suhu) / (4 - 1)) * 0.1;
         $curah_hujan = ((4 - $request->curah_hujan) / (4 - 1)) * 0.1;
         $tekstur_tanah = ((4 - $request->tekstur_tanah) / (4 - 1)) * 0.1;
-        $kedalaman_tanah = ((4 - $request->kedalaman_tanah) / (4 - 1)) * 0.1;
+        $kedalaman_tanah = ((4 - $kedalaman_tanah) / (4 - 1)) * 0.1;
         $ph = ((4 - $request->ph) / (4 - 1)) * 0.1;
         $bahaya_erosi = ((4 - $request->bahaya_erosi) / (4 - 1)) * 0.1;
         $ketebalan_gambut = ((4 - $request->ketebalan_gambut) / (4 - 1)) * 0.1;
@@ -123,7 +180,7 @@ class DataController extends Controller
         } else if ($normalisasi > 70 && $normalisasi <= 100) {
             $hasil = "Berhasil";
         }
-        return $normalisasi;
+        return $hasil;
 
     }
 }

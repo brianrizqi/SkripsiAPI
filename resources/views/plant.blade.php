@@ -20,12 +20,18 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Created At</th>
+                                <th>Action</th>
                             </tr>
                             @foreach($plants as $plant)
                                 <tr>
                                     <td>{{$plant->id}}</td>
                                     <td>{{$plant->name}}</td>
                                     <td>{{$plant->created_at}}</td>
+                                    <td>
+                                        <a href="{{route('data',['id'=>$plant->id])}}" class="btn btn-primary">
+                                            Detail
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>

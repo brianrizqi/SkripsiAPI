@@ -26,7 +26,11 @@
                                 <tr>
                                     <td>{{$item->plant->name}}</td>
                                     <td>{{$item->criteria->kriteria}}</td>
-                                    <td>{{$item->value}}</td>
+                                    @if($item->criteria->kriteria == "Suhu")
+                                        <td>{{$item->value}} Celcius</td>
+                                    @else
+                                        <td>{{$item->value}}</td>
+                                    @endif
                                     <td>{{$item->parameter}}</td>
                                     <td>{{$item->created_at}}</td>
                                 </tr>
