@@ -55,8 +55,7 @@ class UsersController extends Controller
                 $request->name,
                 $request->email,
                 $request->username,
-                Hash::make($request->password),
-                $request->land_area
+                Hash::make($request->password)
             );
             $data['error'] = false;
             $data['message'] = "Success";
@@ -73,8 +72,7 @@ class UsersController extends Controller
             'name' => 'required|string|min:3|max:50',
             'username' => 'required|string|min:5|max:20|unique:users',
             'email' => 'required|string|email|max:191|unique:users',
-            'password' => 'required|string|min:6',
-            'land_area' => 'required',
+            'password' => 'required|string|min:6'
         ]);
     }
 

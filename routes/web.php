@@ -35,6 +35,10 @@ Route::post('/sppk', 'DataController@hitungsppk')->name('sppk.store');
 
 Route::get('/users', 'UsersController@index')->name('users');
 
+Route::get('/area/{id}', 'AreaController@index')->name('area');
+
+Route::get('/planting/{id}', 'PlantingController@index')->name('planting');
+
 Route::get('/test', function () {
     $data = \App\Data::find(4);
     $data = "> 18";

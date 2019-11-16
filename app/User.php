@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'land_area'
+        'name', 'email', 'password', 'username'
     ];
 
     /**
@@ -37,14 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function register($name, $email, $username, $password, $land_area)
+    public static function register($name, $email, $username, $password)
     {
         $users = User::create([
             'name' => $name,
             'email' => $email,
             'username' => $username,
-            'password' => $password,
-            'land_area' => $land_area
+            'password' => $password
         ]);
         if ($users) {
             return true;
@@ -53,8 +52,8 @@ class User extends Authenticatable
         }
     }
 
-    public function plant()
+    public function areas()
     {
-        return $this->hasMany('App\Plant');
+        return $this->hasMany('App\Area');
     }
 }
