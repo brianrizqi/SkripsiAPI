@@ -64,6 +64,7 @@
                                             <option value="{{$item->parameter}}">{{$item->value}}</option>
                                         @endforeach
                                     </select>
+{{--                                    <input type="text" class="form-control" name="ph">--}}
                                 </div>
                             </div>
                             <div class="form-group row mb-4">

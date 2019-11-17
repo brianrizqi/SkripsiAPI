@@ -41,7 +41,7 @@ class UsersController extends Controller
             $data['message'] = 'Success';
         } else {
             $data['error'] = true;
-            $data['message'] = 'bzz';
+            $data['message'] = $password;
         }
         return response()->json($data);
     }
@@ -54,8 +54,8 @@ class UsersController extends Controller
             $users = User::register(
                 $request->name,
                 $request->email,
-                $request->username,
-                Hash::make($request->password)
+                Hash::make($request->password),
+                $request->username
             );
             $data['error'] = false;
             $data['message'] = "Success";

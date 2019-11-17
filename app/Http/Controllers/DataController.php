@@ -45,7 +45,8 @@ class DataController extends Controller
         $data = new Data();
         $data->plant_id = $request->plant;
         $data->criteria_id = $request->criteria;
-        $data->value = $request->value;
+        $data->min_value = $request->min_value;
+        $data->max_value = $request->max_value;
         $data->parameter = $request->parameter;
         $data->save();
         return redirect('data/create');
@@ -107,6 +108,7 @@ class DataController extends Controller
         $data = Data::where('plant_id', 1)->get();
         $suhu = 0;
         $kedalaman_tanah = 0;
+        $ph = 0;
 
         //suhu
         foreach ($data->where('criteria_id', 1) as $item) {
@@ -158,6 +160,32 @@ class DataController extends Controller
                 }
             }
         }
+        //
+
+        //ph
+//        foreach ($data->where('criteria_id', 5) as $item) {
+//            $temp = str_replace(" ", "", $item->value);
+//            $kurang = strpos($temp, '<');
+//            $lebih = strpos($temp, '>');
+//            if ($kurang !== false) {
+//                $batas = substr($temp, -1);
+//                if ($request->ph < $batas) {
+//                    $ph = $item->parameter;
+//                }
+//            } else if ($lebih !== false) {
+//                $batas = substr($temp, -1);
+//                if ($request->ph > $batas) {
+//                    $ph = $item->parameter;
+//                }
+//            } else {
+//                $batasAtas = substr($temp, 0, 2);
+//                $batasBawah = substr($temp, -1);
+//                $d = $request->ph;
+//                if ($d >= $batasAtas && $d <= $batasBawah) {
+//                    $ph = $item->parameter;
+//                }
+//            }
+//        }
         //
 
         //metode SMART

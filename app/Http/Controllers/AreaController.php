@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AreaController extends Controller
 {
@@ -16,6 +17,21 @@ class AreaController extends Controller
     {
         $areas = Area::where('user_id', $id)->get();
         return view('area', compact('areas'));
+    }
+
+    public function indexApi($id)
+    {
+        $areas = Area::with('plantings.plant')->where('user_id', $id)->get();
+        $data = array();
+        if ($areas->count() == 0) {
+            $data['error'] = true;
+            $data['message'] = "No data";
+        } else {
+            $data['error'] = false;
+            $data['message'] = "Success";
+            $data['data'] = $areas;
+        }
+        return response()->json($data);
     }
 
     /**
@@ -36,7 +52,23 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|integer',
+            'large' => 'required|integer'
+        ]);
+        $data = array();
+        if ($validator->fails()) {
+            $data['error'] = true;
+            $data['message'] = "No data";
+        } else {
+            $area = new Area();
+            $area->user_id = $request->user_id;
+            $area->large = $request->large;
+            $area->save();
+            $data['error'] = false;
+            $data['message'] = "Data berhasil ditambahkan";
+        }
+        return response()->json($data);
     }
 
     /**

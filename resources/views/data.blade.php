@@ -26,11 +26,7 @@
                                 <tr>
                                     <td>{{$item->plant->name}}</td>
                                     <td>{{$item->criteria->kriteria}}</td>
-                                    @if($item->criteria->kriteria == "Suhu")
-                                        <td>{{$item->value}} Celcius</td>
-                                    @else
-                                        <td>{{$item->value}}</td>
-                                    @endif
+                                    <td>{{$item->min_value}} @if($item->max_value != null) - {{$item->max_value}} @endif</td>
                                     <td>{{$item->parameter}}</td>
                                     <td>{{$item->created_at}}</td>
                                 </tr>

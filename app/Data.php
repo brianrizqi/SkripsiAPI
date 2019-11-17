@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $plant_id
  * @property int $criteria_id
  * @property int $parameter
- * @property string $value
+ * @property string $min_value
+ * @property string $max_value
  * @property string $created_at
  * @property string $updated_at
  * @property Plant $plant
- * @property Value $values
+ * @property Value $value
  * @property Criteria $criteria
  */
 class Data extends Model
@@ -21,7 +22,7 @@ class Data extends Model
     /**
      * @var array
      */
-    protected $fillable = ['plant_id', 'criteria_id', 'parameter', 'value', 'created_at', 'updated_at'];
+    protected $fillable = ['plant_id', 'criteria_id', 'parameter', 'min_value', 'max_value', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

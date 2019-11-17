@@ -13,6 +13,9 @@ Route::get('/getCuaca', 'PlantsController@getCuaca');
 
 Route::get('/article', 'ArticleController@indexApi');
 
+Route::get('/area/{id}', 'AreaController@indexApi');
+Route::post('/area', 'AreaController@store');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

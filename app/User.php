@@ -37,13 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function register($name, $email, $username, $password)
+    public static function register($name, $email, $password, $username)
     {
         $users = User::create([
             'name' => $name,
             'email' => $email,
-            'username' => $username,
-            'password' => $password
+            'password' => $password,
+            'username' => $username
         ]);
         if ($users) {
             return true;
