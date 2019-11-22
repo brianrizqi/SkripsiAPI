@@ -16,6 +16,8 @@ Route::get('/article', 'ArticleController@indexApi');
 Route::get('/area/{id}', 'AreaController@indexApi');
 Route::post('/area', 'AreaController@store');
 
+Route::get('/planting/{id}', 'PlantingController@indexApi');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

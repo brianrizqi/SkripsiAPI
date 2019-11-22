@@ -18,6 +18,20 @@ class PlantingController extends Controller
         return view('planting', compact('plantings'));
     }
 
+    public function indexApi($id){
+        $plantings = Planting::with('plant')->where('area_id', $id)->get();
+        $data = array();
+        if ($plantings->count() == 0) {
+            $data['error'] = true;
+            $data['message'] = "No data";
+        } else {
+            $data['error'] = false;
+            $data['message'] = "Success";
+            $data['data'] = $plantings;
+        }
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
