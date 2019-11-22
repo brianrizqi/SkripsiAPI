@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Planting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PlantingController extends Controller
 {
@@ -18,7 +19,8 @@ class PlantingController extends Controller
         return view('planting', compact('plantings'));
     }
 
-    public function indexApi($id){
+    public function indexApi($id)
+    {
         $plantings = Planting::with('plant')->where('area_id', $id)->get();
         $data = array();
         if ($plantings->count() == 0) {
@@ -50,7 +52,26 @@ class PlantingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'area_id' => 'required|integer',
+            'plant_id' => 'required|integer'
+        ]);
+        $data = array();
+        if ($validator->fails()) {
+            $data['error'] = true;
+            $data['message'] = "No data";
+        } else {
+            $planting = new Planting();
+            $planting->area_id = $request->area_id;
+            $planting->plant_id = $request->plant_id;
+            $planting->profit = 0;
+            $planting->loss = 0;
+            $planting->status = 0;
+            $planting->save();
+            $data['error'] = false;
+            $data['message'] = "Data berhasil ditambahkan";
+        }
+        return response()->json($data);
     }
 
     /**

@@ -18,6 +18,16 @@ class PlantController extends Controller
         return view('plant', compact('plants'));
     }
 
+    public function indexApi()
+    {
+        $plants = Plant::all();
+        $data = array();
+        $data['message'] = "Success";
+        $data['error'] = false;
+        $data['data'] = $plants;
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
