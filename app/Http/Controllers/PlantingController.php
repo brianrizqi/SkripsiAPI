@@ -105,7 +105,24 @@ class PlantingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'pemasukan' => 'required|integer',
+            'pengeluaran' => 'required|integer'
+        ]);
+        $data = array();
+        if ($validator->fails()) {
+            $data['error'] = true;
+            $data['message'] = "No data";
+        } else {
+            $planting = Planting::find($id);
+            $planting->profit = $request->pemasukan;
+            $planting->loss = $request->pengeluaran;
+            $planting->status = 1;
+            $planting->save();
+            $data['error'] = false;
+            $data['message'] = "Data berhasil diupdate";
+        }
+        return response()->json($data);
     }
 
     /**
