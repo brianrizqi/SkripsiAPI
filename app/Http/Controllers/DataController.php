@@ -109,27 +109,19 @@ class DataController extends Controller
         $suhu = 0;
         $kedalaman_tanah = 0;
         $ph = 0;
-
+        $array = array();
         //suhu
         foreach ($data->where('criteria_id', 1) as $item) {
-            $temp = str_replace(" ", "", $item->value);
-            $kurang = strpos($temp, '<');
-            $lebih = strpos($temp, '>');
-            if ($kurang !== false) {
-                $batas = substr($temp, -2);
-                if ($request->suhu < $batas) {
+            if ($item->min_value != null && $item->max_value != null) {
+                if ($request->suhu >= $item->min_value && $request->suhu <= $item->max_value) {
                     $suhu = $item->parameter;
                 }
-            } else if ($lebih !== false) {
-                $batas = substr($temp, -2);
-                if ($request->suhu > $batas) {
+            } else if ($item->max_value == null && $item->min_value != null) {
+                if ($request->suhu < $item->min_value) {
                     $suhu = $item->parameter;
                 }
-            } else {
-                $batasAtas = substr($temp, 0, 2);
-                $batasBawah = substr($temp, -2);
-                $d = $request->suhu;
-                if ($d >= $batasAtas && $d <= $batasBawah) {
+            } else if ($item->min_value == null && $item->max_value != null) {
+                if ($request->suhu > $item->max_value) {
                     $suhu = $item->parameter;
                 }
             }
@@ -138,68 +130,48 @@ class DataController extends Controller
 
         //kedalaman tanah
         foreach ($data->where('criteria_id', 4) as $item) {
-            $temp = str_replace(" ", "", $item->value);
-            $kurang = strpos($temp, '<');
-            $lebih = strpos($temp, '>');
-            if ($kurang !== false) {
-                $batas = substr($temp, -2);
-                if ($request->kedalaman_tanah < $batas) {
+            if ($item->min_value != null && $item->max_value != null) {
+                if ($request->kedalaman_tanah >= $item->min_value && $request->kedalaman_tanah <= $item->max_value) {
                     $kedalaman_tanah = $item->parameter;
                 }
-            } else if ($lebih !== false) {
-                $batas = substr($temp, -2);
-                if ($request->kedalaman_tanah > $batas) {
+            } else if ($item->max_value == null && $item->min_value != null) {
+                if ($request->kedalaman_tanah < $item->min_value) {
                     $kedalaman_tanah = $item->parameter;
                 }
-            } else {
-                $batasAtas = substr($temp, 0, 2);
-                $batasBawah = substr($temp, -2);
-                $d = $request->kedalaman_tanah;
-                if ($d >= $batasAtas && $d <= $batasBawah) {
+            } else if ($item->min_value == null && $item->max_value != null) {
+                if ($request->kedalaman_tanah > $item->max_value) {
                     $kedalaman_tanah = $item->parameter;
                 }
             }
         }
         //
 
-        //ph
-//        foreach ($data->where('criteria_id', 5) as $item) {
-//            $temp = str_replace(" ", "", $item->value);
-//            $kurang = strpos($temp, '<');
-//            $lebih = strpos($temp, '>');
-//            if ($kurang !== false) {
-//                $batas = substr($temp, -1);
-//                if ($request->ph < $batas) {
-//                    $ph = $item->parameter;
-//                }
-//            } else if ($lebih !== false) {
-//                $batas = substr($temp, -1);
-//                if ($request->ph > $batas) {
-//                    $ph = $item->parameter;
-//                }
-//            } else {
-//                $batasAtas = substr($temp, 0, 2);
-//                $batasBawah = substr($temp, -1);
-//                $d = $request->ph;
-//                if ($d >= $batasAtas && $d <= $batasBawah) {
-//                    $ph = $item->parameter;
-//                }
-//            }
-//        }
-        //
-
+        foreach ($data->where('criteria_id', 5) as $item) {
+            if ($item->min_value != null && $item->max_value != null) {
+                if ($request->ph >= $item->min_value && $request->ph <= $item->max_value) {
+                    $ph = $item->parameter;
+                }
+            } else if ($item->max_value == null && $item->min_value != null) {
+                if ($request->ph < $item->min_value) {
+                    $ph = $item->parameter;
+                }
+            } else if ($item->min_value == null && $item->max_value != null) {
+                if ($request->ph > $item->max_value) {
+                    $ph = $item->parameter;
+                }
+            }
+        }
         //metode SMART
-        $suhu = ((4 - $suhu) / (4 - 1)) * 0.1;
-        $curah_hujan = ((4 - $request->curah_hujan) / (4 - 1)) * 0.1;
-        $tekstur_tanah = ((4 - $request->tekstur_tanah) / (4 - 1)) * 0.1;
-        $kedalaman_tanah = ((4 - $kedalaman_tanah) / (4 - 1)) * 0.1;
-        $ph = ((4 - $request->ph) / (4 - 1)) * 0.1;
-        $bahaya_erosi = ((4 - $request->bahaya_erosi) / (4 - 1)) * 0.1;
-        $ketebalan_gambut = ((4 - $request->ketebalan_gambut) / (4 - 1)) * 0.1;
-        $drainase = ((4 - $request->drainase) / (4 - 1)) * 0.1;
-        $rotasi_tanam = ((4 - $request->rotasi_tanam) / (4 - 1)) * 0.2;
+        $suhu = ((4 - $suhu) / (4 - 1)) * ($data->where('criteria_id', 1)->first()->criteria->bobot * 0.01);
+        $curah_hujan = ((4 - $request->curah_hujan) / (4 - 1)) * ($data->where('criteria_id', 2)->first()->criteria->bobot * 0.01);
+        $tekstur_tanah = ((4 - $request->tekstur_tanah) / (4 - 1)) * ($data->where('criteria_id', 3)->first()->criteria->bobot * 0.01);
+        $kedalaman_tanah = ((4 - $kedalaman_tanah) / (4 - 1)) * ($data->where('criteria_id', 4)->first()->criteria->bobot * 0.01);
+        $ph = ((4 - $ph) / (4 - 1)) * ($data->where('criteria_id', 5)->first()->criteria->bobot * 0.01);
+        $bahaya_erosi = ((4 - $request->bahaya_erosi) / (4 - 1)) * ($data->where('criteria_id', 6)->first()->criteria->bobot * 0.01);
+        $drainase = ((4 - $request->drainase) / (4 - 1)) * ($data->where('criteria_id', 7)->first()->criteria->bobot * 0.01);
+        $rotasi_tanam = ((4 - $request->rotasi_tanam) / (4 - 1)) * ($data->where('criteria_id', 8)->first()->criteria->bobot * 0.01);
         $normalisasi = ($suhu + $curah_hujan + $tekstur_tanah + $kedalaman_tanah + $ph + $bahaya_erosi
-                + $ketebalan_gambut + $drainase + $rotasi_tanam) * 100;
+                + $drainase + $rotasi_tanam) * 100;
         $hasil = "";
         if ($normalisasi > 0 && $normalisasi < 30) {
             $hasil = "Tidak Berhasil";
@@ -208,7 +180,15 @@ class DataController extends Controller
         } else if ($normalisasi > 70 && $normalisasi <= 100) {
             $hasil = "Berhasil";
         }
-        return $hasil;
+        if ($normalisasi < 0) {
+            $array['error'] = true;
+            $array['message'] = "Error";
+        } else {
+            $array['error'] = false;
+            $array['message'] = $hasil;
+            $array['data'] = round($normalisasi);
+        }
+        return response()->json($array);
 
     }
 }

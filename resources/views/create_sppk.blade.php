@@ -17,11 +17,11 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Suhu</label>
                                 <div class="col-sm-12 col-md-7">
-{{--                                    <select class="form-control" name="suhu">--}}
-{{--                                        @foreach($data->where('criteria_id',1) as $item)--}}
-{{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
+                                    {{--                                    <select class="form-control" name="suhu">--}}
+                                    {{--                                        @foreach($data->where('criteria_id',1) as $item)--}}
+                                    {{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
+                                    {{--                                        @endforeach--}}
+                                    {{--                                    </select>--}}
                                     <input type="number" class="form-control" name="suhu">
                                 </div>
                             </div>
@@ -30,59 +30,59 @@
                                 <div class="col-sm-12 col-md-7">
                                     <select class="form-control" name="curah_hujan">
                                         @foreach($data->where('criteria_id',2) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->value}}</option>
+                                            @if($item->min_value == null)
+                                                <option value="{{$item->parameter}}"> {{"> ".$item->max_value}}</option>
+                                            @elseif($item->max_value == null)
+                                                <option value="{{$item->parameter}}"> {{"< ".$item->min_value}}</option>
+                                            @else
+                                                <option value="{{$item->parameter}}">{{$item->min_value}}
+                                                    - {{$item->max_value}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tekstur Tanah</label>
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tekstur
+                                    Tanah</label>
                                 <div class="col-sm-12 col-md-7">
                                     <select class="form-control" name="tekstur_tanah">
                                         @foreach($data->where('criteria_id',3) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->value}}</option>
+                                            <option value="{{$item->parameter}}">{{$item->min_value}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kedalaman Tanah</label>
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kedalaman
+                                    Tanah</label>
                                 <div class="col-sm-12 col-md-7">
-{{--                                    <select class="form-control" name="kedalaman_tanah">--}}
-{{--                                        @foreach($data->where('criteria_id',4) as $item)--}}
-{{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
+                                    {{--                                    <select class="form-control" name="kedalaman_tanah">--}}
+                                    {{--                                        @foreach($data->where('criteria_id',4) as $item)--}}
+                                    {{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
+                                    {{--                                        @endforeach--}}
+                                    {{--                                    </select>--}}
                                     <input type="number" class="form-control" name="kedalaman_tanah">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">PH</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <select class="form-control" name="ph">
-                                        @foreach($data->where('criteria_id',5) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->value}}</option>
-                                        @endforeach
-                                    </select>
-{{--                                    <input type="text" class="form-control" name="ph">--}}
+{{--                                    <select class="form-control" name="ph">--}}
+{{--                                        @foreach($data->where('criteria_id',5) as $item)--}}
+{{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+                                    <input type="text" class="form-control" name="ph">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Bahaya Erosi</label>
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Bahaya
+                                    Erosi</label>
                                 <div class="col-sm-12 col-md-7">
                                     <select class="form-control" name="bahaya_erosi">
                                         @foreach($data->where('criteria_id',6) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->value}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Ketebalan Gambut</label>
-                                <div class="col-sm-12 col-md-7">
-                                    <select class="form-control" name="ketebalan_gambut">
-                                        @foreach($data->where('criteria_id',7) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->value}}</option>
+                                            <option value="{{$item->parameter}}">{{$item->min_value}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -91,18 +91,19 @@
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Drainase</label>
                                 <div class="col-sm-12 col-md-7">
                                     <select class="form-control" name="drainase">
-                                        @foreach($data->where('criteria_id',8) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->value}}</option>
+                                        @foreach($data->where('criteria_id',7) as $item)
+                                            <option value="{{$item->parameter}}">{{$item->min_value}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Rotasi Tanam</label>
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Rotasi
+                                    Tanam</label>
                                 <div class="col-sm-12 col-md-7">
                                     <select class="form-control" name="rotasi_tanam">
-                                        @foreach($data->where('criteria_id',9) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->value}}</option>
+                                        @foreach($data->where('criteria_id',8) as $item)
+                                            <option value="{{$item->parameter}}">{{$item->min_value}}</option>
                                         @endforeach
                                     </select>
                                 </div>
