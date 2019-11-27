@@ -17,29 +17,13 @@
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Suhu</label>
                                 <div class="col-sm-12 col-md-7">
-                                    {{--                                    <select class="form-control" name="suhu">--}}
-                                    {{--                                        @foreach($data->where('criteria_id',1) as $item)--}}
-                                    {{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
-                                    {{--                                        @endforeach--}}
-                                    {{--                                    </select>--}}
                                     <input type="number" class="form-control" name="suhu">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Curah Hujan</label>
                                 <div class="col-sm-12 col-md-7">
-                                    <select class="form-control" name="curah_hujan">
-                                        @foreach($data->where('criteria_id',2) as $item)
-                                            @if($item->min_value == null)
-                                                <option value="{{$item->parameter}}"> {{"> ".$item->max_value}}</option>
-                                            @elseif($item->max_value == null)
-                                                <option value="{{$item->parameter}}"> {{"< ".$item->min_value}}</option>
-                                            @else
-                                                <option value="{{$item->parameter}}">{{$item->min_value}}
-                                                    - {{$item->max_value}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                    <input type="number" name="curah_hujan" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
@@ -47,9 +31,10 @@
                                     Tanah</label>
                                 <div class="col-sm-12 col-md-7">
                                     <select class="form-control" name="tekstur_tanah">
-                                        @foreach($data->where('criteria_id',3) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->min_value}}</option>
-                                        @endforeach
+                                        <option value="Halus">Halus</option>
+                                        <option value="Agak Halus">Agak Halus</option>
+                                        <option value="Agak Kasar">Agak Kasar</option>
+                                        <option value="Kasar">Kasar</option>
                                     </select>
                                 </div>
                             </div>
@@ -57,22 +42,12 @@
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kedalaman
                                     Tanah</label>
                                 <div class="col-sm-12 col-md-7">
-                                    {{--                                    <select class="form-control" name="kedalaman_tanah">--}}
-                                    {{--                                        @foreach($data->where('criteria_id',4) as $item)--}}
-                                    {{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
-                                    {{--                                        @endforeach--}}
-                                    {{--                                    </select>--}}
                                     <input type="number" class="form-control" name="kedalaman_tanah">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">PH</label>
                                 <div class="col-sm-12 col-md-7">
-{{--                                    <select class="form-control" name="ph">--}}
-{{--                                        @foreach($data->where('criteria_id',5) as $item)--}}
-{{--                                            <option value="{{$item->parameter}}">{{$item->value}}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
                                     <input type="text" class="form-control" name="ph">
                                 </div>
                             </div>
@@ -81,9 +56,10 @@
                                     Erosi</label>
                                 <div class="col-sm-12 col-md-7">
                                     <select class="form-control" name="bahaya_erosi">
-                                        @foreach($data->where('criteria_id',6) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->min_value}}</option>
-                                        @endforeach
+                                        <option value="Tidak ada">Tidak ada</option>
+                                        <option value="Ringan">Ringan</option>
+                                        <option value="Sedang">Sedang</option>
+                                        <option value="Berat">Berat</option>
                                     </select>
                                 </div>
                             </div>
@@ -91,9 +67,11 @@
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Drainase</label>
                                 <div class="col-sm-12 col-md-7">
                                     <select class="form-control" name="drainase">
-                                        @foreach($data->where('criteria_id',7) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->min_value}}</option>
-                                        @endforeach
+                                        <option value="Terhambat">Terhambat</option>
+                                        <option value="Agak Terhambat">Agak Terhambat</option>
+                                        <option value="Agak Cepat">Agak Cepat</option>
+                                        <option value="Cepat">Cepat</option>
+                                        <option value="Baik">Baik</option>
                                     </select>
                                 </div>
                             </div>
@@ -102,9 +80,12 @@
                                     Tanam</label>
                                 <div class="col-sm-12 col-md-7">
                                     <select class="form-control" name="rotasi_tanam">
-                                        @foreach($data->where('criteria_id',8) as $item)
-                                            <option value="{{$item->parameter}}">{{$item->min_value}}</option>
-                                        @endforeach
+                                        <option value="Padi">Padi</option>
+                                        <option value="Jagung">Jagung</option>
+                                        <option value="Kacang Tanah">Kacang Tanah</option>
+                                        <option value="Ubi Kayu">Ubi Kayu</option>
+                                        <option value="Ubi Jalar">Ubi Jalar</option>
+                                        <option value="Talas">Talas</option>
                                     </select>
                                 </div>
                             </div>

@@ -22,6 +22,7 @@ Route::post('/planting', 'PlantingController@store');
 
 Route::get('/plant', 'PlantController@indexApi');
 
+Route::post('/sppk', 'DataController@hitungsppk');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
