@@ -233,6 +233,7 @@ class DataController extends Controller
                 $hasil = "Sangat Sesuai";
             }
             $result = array();
+            $result['id'] = $data->first()->plant_id;
             $result['tanaman'] = $data->first()->plant->name;
             $result['normalisasi'] = round($normalisasi);
             $result['hasil'] = $hasil;
