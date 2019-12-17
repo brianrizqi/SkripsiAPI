@@ -41,7 +41,7 @@ class UsersController extends Controller
             $data['message'] = 'Success';
         } else {
             $data['error'] = true;
-            $data['message'] = $password;
+            $data['message'] = 'Wrong username / password';
         }
         return response()->json($data);
     }
