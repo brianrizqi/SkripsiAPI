@@ -24,6 +24,9 @@ Route::get('/plant', 'PlantController@indexApi');
 
 Route::post('/sppk', 'DataController@hitungsppk');
 
+Route::get('/user/{id}', 'UsersController@edit');
+Route::post('/user', 'UsersController@update');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

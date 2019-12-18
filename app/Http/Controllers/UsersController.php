@@ -76,4 +76,34 @@ class UsersController extends Controller
         ]);
     }
 
+    public function edit($id)
+    {
+        $user = User::find($id);
+        $data = array();
+        if (!$user) {
+            $data['error'] = true;
+            $data['message'] = 'Tidak ada';
+        } else {
+            $data['error'] = false;
+            $data['message'] = 'Ada data';
+            $data['data'] = $user;
+        }
+        return response()->json($data);
+    }
+
+    public function update(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password != null) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->username = $request->username;
+        $user->save();
+        $data = array();
+        $data['error'] = false;
+        $data['message'] = 'Data berhasil di ubah';
+        return response()->json($data);
+    }
 }
