@@ -90,7 +90,17 @@ class AreaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $area = Area::find($id);
+        $data = array();
+        if ($area != null) {
+            $data['error'] = false;
+            $data['message'] = "Ada data";
+            $data['data'] = $area;
+        } else {
+            $data['error'] = true;
+            $data['message'] = "Tidak ada data";
+        }
+        return response()->json($data);
     }
 
     /**
@@ -102,7 +112,21 @@ class AreaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'large' => 'required|integer'
+        ]);
+        $data = array();
+        if ($validator->fails()) {
+            $data['error'] = true;
+            $data['message'] = "No data";
+        } else {
+            $area = Area::find($id);
+            $area->large = $request->large;
+            $area->save();
+            $data['error'] = false;
+            $data['message'] = "Data berhasil diupdate";
+        }
+        return response()->json($data);
     }
 
     /**
