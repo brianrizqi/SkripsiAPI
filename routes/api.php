@@ -15,10 +15,11 @@ Route::get('/article', 'ArticleController@indexApi');
 
 Route::get('/area/{id}', 'AreaController@indexApi');
 Route::post('/area', 'AreaController@store');
-Route::get('area/edit/{id}','AreaController@edit');
-Route::post('area/{id}/edit','AreaController@update');
+Route::get('area/edit/{id}', 'AreaController@edit');
+Route::post('area/{id}/edit', 'AreaController@update');
 
 Route::get('/planting/{id}', 'PlantingController@indexApi');
+Route::get('/planting/latest/{id}', 'PlantingController@latestPlating');
 Route::post('/planting/{id}/edit', 'PlantingController@update');
 Route::post('/planting', 'PlantingController@store');
 

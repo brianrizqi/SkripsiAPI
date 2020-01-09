@@ -34,6 +34,25 @@ class PlantingController extends Controller
         return response()->json($data);
     }
 
+    public function latestPlating($id)
+    {
+        $plantings = Planting::with('plant')->where('area_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+        $data = array();
+        if ($plantings->count() == 0) {
+            $data['error'] = false;
+            $data['message'] = "No data";
+        } elseif ($plantings->profit == 0) {
+            $data['error'] = false;
+            $data['message'] = "No data";
+        } else {
+            $data['error'] = true;
+            $data['message'] = "Masih ada tanaman yang masa tanam";
+        }
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
