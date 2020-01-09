@@ -43,7 +43,7 @@ class PlantingController extends Controller
         if ($plantings->count() == 0) {
             $data['error'] = false;
             $data['message'] = "No data";
-        } elseif ($plantings->profit == 0) {
+        } elseif ($plantings->status == 0) {
             $data['error'] = true;
             $data['message'] = "Masih ada tanaman yang masa tanam";
         } else {
