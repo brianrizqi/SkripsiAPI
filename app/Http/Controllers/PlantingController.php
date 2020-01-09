@@ -44,11 +44,11 @@ class PlantingController extends Controller
             $data['error'] = false;
             $data['message'] = "No data";
         } elseif ($plantings->profit == 0) {
-            $data['error'] = false;
-            $data['message'] = "No data";
-        } else {
             $data['error'] = true;
             $data['message'] = "Masih ada tanaman yang masa tanam";
+        } else {
+            $data['error'] = false;
+            $data['message'] = "No data";
         }
         return response()->json($data);
     }
