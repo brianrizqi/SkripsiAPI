@@ -40,15 +40,17 @@ class PlantingController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
         $data = array();
-        if ($plantings->count() == 0) {
+        if (is_null($plantings)) {
             $data['error'] = false;
             $data['message'] = "No data";
-        } elseif ($plantings->status == 0) {
-            $data['error'] = true;
-            $data['message'] = "Masih ada tanaman yang masa tanam";
         } else {
-            $data['error'] = false;
-            $data['message'] = "No data";
+            if ($plantings->status == 0) {
+                $data['error'] = true;
+                $data['message'] = "Masih ada tanaman yang masa tanam";
+            } else {
+                $data['error'] = false;
+                $data['message'] = "No data";
+            }
         }
         return response()->json($data);
     }
